@@ -67,6 +67,9 @@ export default {
     MyBooksTable
   },
   name: "user-profile",
+  methods: {
+    
+  },
   data() {
     return {
       model: {

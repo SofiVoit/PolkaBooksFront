@@ -31,8 +31,8 @@
             name: 'Icons',
             icon: 'ni ni-planet text-blue',
             path: '/icons',
-          }" -->
-        <!-- /> -->
+          }"
+        /> -->
         <!-- <sidebar-item
           :link="{
             name: 'Maps',
