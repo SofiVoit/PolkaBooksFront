@@ -41,7 +41,7 @@
                   <i class="ni location_pin mr-2"></i>Россия, Екатеринбург
                 </div>
                 <div>
-                  <i class="ni education_hat mr-2"></i>i.n.obabkov@urfu.ru
+                  <i class="ni education_hat mr-2"></i>ул. Мира 32
                 </div>
               </div>
             </div>

@@ -25,7 +25,7 @@
           <th>Название</th>
           <th>Автор</th>
           <th>Хозяин</th>
-          <th>Почта</th>
+          <th>Телеграм</th>
         </template>
 
         <template v-slot:default="row">
@@ -59,7 +59,9 @@
             </div>
           </td>
           <td class="mail">
-            {{ row.item.mail }}
+            <a :href="`https://telegram.im/@${row.item.tgUserName}`" target="_blank" style="font-size: 25px; cursor: pointer;">
+              <i class="ni ni-send"></i>
+            </a>
           </td>
         </template>
       </base-table>
@@ -88,49 +90,49 @@ export default {
           bookName: "Война и мир",
           bookAutor: 'Л.Н. Толстой',
           ownerImg: 'img/theme/team-1-800x800.jpg',
-          mail: "bigmike2005@gmail.com",
+          tgUserName: "Sofia_voitsik",
         },
         {
           bookName: "Преступление и наказание",
           bookAutor: 'Ф.М. Достоевский',
           ownerImg: 'img/theme/team-2-800x800.jpg',
-          mail: "smallpinguin@mail.ru",
+          tgUserName: "v_prokopchenko",
         },
         {
           bookName: "Вий",
           bookAutor: 'Н.В. Гоголь',
           ownerImg: 'img/theme/team-3-800x800.jpg',
-          mail: "bivaliy97@mail.ru",
+          tgUserName: "v_prokopchenko",
         },
         {
           bookName: "Зов ктулху",
           bookAutor: 'Г.Ф. Лавкрафт',
           ownerImg: 'img/theme/team-4-800x800.jpg',
-          mail: "superhatlol@yandex.ru",
+          tgUserName: "v_prokopchenko",
         },
         {
           bookName: "Человек-паук",
           bookAutor: 'Стэн Ли',
           ownerImg: 'img/theme/rtf.png',
-          mail: "i.n.obabkov@urfu.ru",
+          tgUserName: "Sofia_voitsik",
         },
         {
           bookName: "Черный абелиск",
           bookAutor: 'Э.М. Ремарк',
           ownerImg: 'img/theme/team-2-800x800.jpg',
-          mail: "smallpinguin@mail.ru",
+          tgUserName: "v_prokopchenko",
         },
         {
           bookName: "Гарри Поттер и кубок огня",
           bookAutor: 'Дж. Роулинг',
           ownerImg: 'img/theme/team-4-800x800.jpg',
-          mail: "superhatlol@yandex.ru",
+          tgUserName: "v_prokopchenko",
         },
         {
           bookName: "Хоббит или путешествие туда и обратно",
           bookAutor: 'Дж. Толкиен',
           ownerImg: 'img/theme/team-1-800x800.jpg',
-          mail: "bigmike2005@gmail.com",
+          tgUserName: "v_prokopchenko",
         },
       ]
     };

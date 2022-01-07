@@ -25,7 +25,7 @@
         <template v-slot:columns>
           <th>Название</th>
           <th>Автор</th>
-          <th>Моя оценка</th>
+          <th>Жанр</th>
           <th></th>
         </template>
 
@@ -83,7 +83,7 @@ export default {
         html:
           '<input id="swal-input1" placeholder="Название" class="swal2-input">' +
           '<input id="swal-input2" placeholder="Автор" class="swal2-input">' +
-          '<input id="swal-input3" placeholder="Оценка" class="swal2-input">',
+          '<input id="swal-input3" placeholder="Жанр" class="swal2-input">',
         focusConfirm: false,
         preConfirm() {
           return [

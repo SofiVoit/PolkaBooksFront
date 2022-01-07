@@ -1,6 +1,6 @@
 {
   "name": "vue-argon-dashboard",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "private": true,
   "scripts": {
     "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
@@ -13,9 +13,11 @@
     "chart.js": "2.9.4",
     "core-js": "3.6.5",
     "element-plus": "1.0.1-beta.24",
+    "firebase": "^9.6.1",
     "google-maps": "4.3.3",
     "nouislider": "14.6.0",
     "vue": "3.0.5",
+    "vue-firebase": "^1.0.8",
     "vue-router": "4.0.1",
     "vue-simple-alert": "^1.1.1",
     "vue-sweetalert2": "^5.0.2",

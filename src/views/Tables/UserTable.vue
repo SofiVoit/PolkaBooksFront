@@ -24,7 +24,7 @@
         <template v-slot:columns>
           <th>Название</th>
           <th>Автор</th>
-          <th>Оценка</th>
+          <th>Жанр</th>
         </template>
 
         <template v-slot:default="row">
