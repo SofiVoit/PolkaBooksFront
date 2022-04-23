@@ -52,12 +52,12 @@ const routes = [
     children: [
       {
         path: "/login",
-        name: "login",
+        name: "Вход",
         components: { default: Login },
       },
       {
         path: "/register",
-        name: "register",
+        name: "Регистрация",
         components: { default: Register },
       },
     ],
