@@ -21,6 +21,21 @@ import router from "./router";
 import ArgonDashboard from "./plugins/argon-dashboard";
 import "element-plus/lib/theme-chalk/index.css";
 
+import { initializeApp } from 'firebase/app';
+
+// TODO: Replace the following with your app's Firebase project configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCRlMy2qr-HwDCsxE9q4D75gSVqQDCwFbM",
+    authDomain: "fir-auth2-5d975.firebaseapp.com",
+    databaseURL: "https://fir-auth2-5d975.firebaseio.com",
+    projectId: "fir-auth2-5d975",
+    storageBucket: "fir-auth2-5d975.appspot.com",
+    messagingSenderId: "883989697225",
+    appId: "1:883989697225:web:588528e7ad121633753318"
+};
+
+initializeApp(firebaseConfig);
+
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
