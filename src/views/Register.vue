@@ -8,7 +8,7 @@
           </div>
           <form role="form">
             <base-input
-              formClasses="input-group-alternative"
+              formClasses="input-group-alternative mb-3"
               placeholder="Email"
               addon-left-icon="ni ni-email-83"
               v-model="model.email"
@@ -17,7 +17,7 @@
             </base-input>
 
             <base-input
-              formClasses="input-group-alternative"
+              formClasses="input-group-alternative mb-3"
               placeholder="Password"
               type="password"
               addon-left-icon="ni ni-lock-circle-open"
