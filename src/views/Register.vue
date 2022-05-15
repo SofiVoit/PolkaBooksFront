@@ -54,6 +54,8 @@ export default {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, this.$data.model.email, this.$data.model.password).then((userCredential) => {
           console.log('USER REGISTERED', userCredential.user);
+          window.setCookie('authToken', userCredential.user.accessToken);
+          this.$router.push('/dashboard');
       })
       .catch((error) => {
           console.log('USER REGISTER ERROR', error);

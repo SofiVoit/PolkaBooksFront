@@ -34,7 +34,7 @@
               </div>
             </div>
           </template>
-          <div class="dropdown-header noti-title">
+          <!-- <div class="dropdown-header noti-title">
             <h6 class="text-overflow m-0">Welcome!</h6>
           </div>
           <router-link to="/profile" class="dropdown-item">
@@ -53,10 +53,10 @@
             <i class="ni ni-support-16"></i>
             <span>Support</span>
           </router-link>
-          <div class="dropdown-divider"></div>
+          <div class="dropdown-divider"></div> -->
           <router-link to="/profile" class="dropdown-item">
             <i class="ni ni-user-run"></i>
-            <span>Logout</span>
+            <span @click="logout">Выход</span>
           </router-link>
         </base-dropdown>
       </li>
@@ -82,6 +82,10 @@ export default {
     toggleMenu() {
       this.showMenu = !this.showMenu;
     },
+    logout() {
+      window.deleteCookie('authToken');
+      this.$router.push('/login');
+    }
   },
 };
 </script>

@@ -53,10 +53,12 @@ export default {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.$data.model.email, this.$data.model.password)
         .then((userCredential) => {
-           console.log('USER LOGIN', userCredential.user);
+          console.log('USER LOGIN', userCredential.user);
+          window.setCookie('authToken', userCredential.user.accessToken);
+          this.$router.push('/dashboard');
         })
         .catch((error) => {
-            console.log('USER LOGIN ERROR', error);
+          console.log('USER LOGIN ERROR', error);
         });
     }
   }
