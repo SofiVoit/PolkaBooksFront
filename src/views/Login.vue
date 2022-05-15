@@ -36,7 +36,7 @@
   </div>
 </template>
 <script>
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, setPersistence, browserSessionPersistence } from "firebase/auth";
 
 export default {
   name: "login",
@@ -51,6 +51,7 @@ export default {
   methods: {
     login() {
       const auth = getAuth();
+      setPersistence(auth, browserSessionPersistence);
       signInWithEmailAndPassword(auth, this.$data.model.email, this.$data.model.password)
         .then((userCredential) => {
           console.log('USER LOGIN', userCredential.user);

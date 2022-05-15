@@ -18,10 +18,25 @@
 
             <base-input
               formClasses="input-group-alternative mb-3"
-              placeholder="Password"
-              type="password"
+              placeholder="Пароль"
               addon-left-icon="ni ni-lock-circle-open"
               v-model="model.password"
+            >
+            </base-input>
+
+            <base-input
+              formClasses="input-group-alternative mb-3"
+              placeholder="Имя"
+              addon-left-icon="ni ni-lock-circle-open"
+              v-model="model.name"
+            >
+            </base-input>
+
+            <base-input
+              formClasses="input-group-alternative mb-3"
+              placeholder="имя пользователя телеграм"
+              addon-left-icon="ni ni-lock-circle-open"
+              v-model="model.tgTag"
             >
             </base-input>
 
@@ -37,7 +52,7 @@
   </div>
 </template>
 <script>
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, setPersistence, browserSessionPersistence } from "firebase/auth";
 
 export default {
   name: "register",
@@ -46,15 +61,22 @@ export default {
       model: {
         email: "",
         password: "",
+        name: '',
+        tgTag: ''
       },
     };
   },
   methods: {
     register() {
       const auth = getAuth();
+      setPersistence(auth, browserSessionPersistence);
       createUserWithEmailAndPassword(auth, this.$data.model.email, this.$data.model.password).then((userCredential) => {
-          console.log('USER REGISTERED', userCredential.user);
           window.setCookie('authToken', userCredential.user.accessToken);
+          updateProfile(auth.currentUser, {
+            displayName: this.$data.model.name,
+            photoURL: this.$data.model.tgTag
+          });
+          console.log('USER REGISTERED', userCredential.user);
           this.$router.push('/dashboard');
       })
       .catch((error) => {

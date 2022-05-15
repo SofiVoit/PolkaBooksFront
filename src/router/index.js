@@ -91,61 +91,13 @@ const router = createRouter({
   routes,
 });
 
-// возвращает куки с указанным name,
-// или undefined, если ничего не найдено
-function getCookie(name) {
-  const cookies = document.cookie.split(/;/);
-  const obj = {};
-  for (var i = 0, len = cookies.length; i < len; i++) {
-    const cookie = cookies[i].split(/=/);
-    if (cookie.length) {
-      obj[cookie[0].trim()] = cookie[1];
-    }
-  }
-
-  return obj[name];
-}
-
-function setCookie(name, value, options = {}) {
-  options = {
-    path: '/',
-    // при необходимости добавьте другие значения по умолчанию
-    ...options
-  };
-
-  if (options.expires instanceof Date) {
-    options.expires = options.expires.toUTCString();
-  }
-
-  let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
-
-  for (let optionKey in options) {
-    updatedCookie += "; " + optionKey;
-    let optionValue = options[optionKey];
-    if (optionValue !== true) {
-      updatedCookie += "=" + optionValue;
-    }
-  }
-
-  document.cookie = updatedCookie;
-}
-
-function deleteCookie(name) {
-  setCookie(name, "", {
-    'max-age': -1
-  })
-}
-
-window.getCookie = getCookie;
-window.setCookie = setCookie;
-window.deleteCookie = deleteCookie;
 
 router.beforeEach((to, from, next) => {
   const needAuth = to.matched.some((record) => {
     return record.meta.requiresAuth;
   });
   if (needAuth) {
-    if (getCookie('authToken')) {
+    if (window.getCookie('authToken')) {
       next();
     } else {
       next({

@@ -30,7 +30,7 @@
                 />
               </span>
               <div class="media-body ml-2 d-none d-lg-block">
-                <span class="mb-0 text-sm font-weight-bold">Софья Войцик</span>
+                <span class="mb-0 text-sm font-weight-bold">{{ dispalyName }}</span>
               </div>
             </div>
           </template>
@@ -64,9 +64,20 @@
   </base-nav>
 </template>
 <script>
+import { getAuth } from "firebase/auth";
+
 export default {
+  mounted() {
+    const auth = getAuth();
+    auth.onAuthStateChanged(() => {
+      if (auth.currentUser) {
+        this.dispalyName = auth.currentUser.displayName;
+      }
+    })
+  },
   data() {
     return {
+      dispalyName: '',
       activeNotifications: false,
       showMenu: false,
       searchQuery: "",
@@ -83,7 +94,9 @@ export default {
       this.showMenu = !this.showMenu;
     },
     logout() {
+      const auth = getAuth();
       window.deleteCookie('authToken');
+      auth.signOut();
       this.$router.push('/login');
     }
   },
