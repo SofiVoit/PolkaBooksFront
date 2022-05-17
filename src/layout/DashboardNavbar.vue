@@ -23,10 +23,10 @@
         <base-dropdown class="nav-link pr-0">
           <template v-slot:title>
             <div class="media align-items-center">
-              <span class="avatar avatar-sm rounded-circle">
+              <span v-if="photoUrl" class="avatar avatar-sm rounded-circle">
                 <img
                   alt="Image placeholder"
-                  src="img/theme/sonya.jpg"
+                  :src="photoUrl"
                 />
               </span>
               <div class="media-body ml-2 d-none d-lg-block">
@@ -72,6 +72,9 @@ export default {
     auth.onAuthStateChanged(() => {
       if (auth.currentUser) {
         this.dispalyName = auth.currentUser.displayName;
+        if (auth.currentUser.photoURL) {
+          this.photoUrl = `https://telegram.im/img/${auth.currentUser.photoURL.trim()}`; 
+        }
       }
     })
   },
@@ -80,6 +83,7 @@ export default {
       dispalyName: '',
       activeNotifications: false,
       showMenu: false,
+      photoUrl: null,
       searchQuery: "",
     };
   },

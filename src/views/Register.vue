@@ -70,9 +70,9 @@ export default {
     register() {
       const auth = getAuth();
       setPersistence(auth, browserSessionPersistence);
-      createUserWithEmailAndPassword(auth, this.$data.model.email, this.$data.model.password).then((userCredential) => {
+      createUserWithEmailAndPassword(auth, this.$data.model.email, this.$data.model.password).then(async (userCredential) => {
           window.setCookie('authToken', userCredential.user.accessToken);
-          updateProfile(auth.currentUser, {
+          await updateProfile(auth.currentUser, {
             displayName: this.$data.model.name,
             photoURL: this.$data.model.tgTag
           });
