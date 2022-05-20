@@ -12,7 +12,7 @@
                 <div class="card-profile-image">
                   <a href="#">
                     <img
-                      src="img/theme/sonya2.jpg"
+                      :src="photoUrl"
                       class="rounded-circle"
                     />
                   </a>
@@ -23,8 +23,11 @@
               class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
             >
               <div class="d-flex justify-content-between">
-                <base-button size="sm" type="info" class="mr-4"
+                <base-button v-if="!isEdit" @click="edit" size="sm" type="info" class="mr-4"
                   >Редактировать</base-button
+                >
+                <base-button v-else @click="save" size="sm" type="success" class="mr-4"
+                  >Сохранить</base-button
                 >
               </div>
             </div>
@@ -38,14 +41,29 @@
                 </div>
               </div>
               <div class="text-center">
-                <h3>
-                  Софья Войцик<span class="font-weight-light">, 21</span>
+                <h3 v-if="!isEdit">
+                  {{ displayName }}
                 </h3>
-                <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i>Россия, Екатеринбург
+                <div v-else>
+                  <base-input
+                    formClasses="input-group-alternative mb-3"
+                    placeholder="Имя"
+                    addon-left-icon="ni ni-circle-08"
+                    v-model="displayName"
+                  >
+                  </base-input>
                 </div>
-                <div>
-                  <i class="ni education_hat mr-2"></i>sonya2000@gmail.com
+                <div v-if="!isEdit">
+                  {{ tgName }}
+                </div>
+                <div v-else>
+                  <base-input
+                    formClasses="input-group-alternative mb-3"
+                    placeholder="Имя пользователя телеграм"
+                    addon-left-icon="ni ni-send"
+                    v-model="tgName"
+                  >
+                  </base-input>
                 </div>
               </div>
             </div>
@@ -61,28 +79,46 @@
 <script>
 
 import MyBooksTable from "./Tables/MyBooksTable";
+import { getAuth, updateProfile } from "firebase/auth";
 
 export default {
   components: {
     MyBooksTable
   },
   name: "user-profile",
+  mounted() {
+    const auth = getAuth();
+    this.$data.auth = auth;
+    auth.onAuthStateChanged(() => {
+      if (auth.currentUser) {
+        this.displayName = auth.currentUser.displayName;
+        if (auth.currentUser.photoURL) {
+          this.photoUrl = `https://telegram.im/img/${auth.currentUser.photoURL.trim()}`; 
+          this.tgName = auth.currentUser.photoURL;
+        }
+      }
+    })
+  },
   methods: {
-    
+    save: async function() {
+      this.isEdit = false;
+
+      await updateProfile(this.$data.auth.currentUser, {
+            displayName: this.$data.displayName,
+            photoURL: this.$data.tgName
+      });
+    },
+    edit: function() {
+      this.isEdit = true;
+    }
   },
   data() {
     return {
-      model: {
-        username: "",
-        email: "",
-        firstName: "",
-        lastName: "",
-        address: "",
-        city: "",
-        country: "",
-        zipCode: "",
-        about: "",
-      },
+      auth: null,
+      displayName: '',
+      photoUrl: '',
+      tgName: '',
+      isEdit: false
     };
   },
 };

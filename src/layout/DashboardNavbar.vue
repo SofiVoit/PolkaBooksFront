@@ -30,7 +30,7 @@
                 />
               </span>
               <div class="media-body ml-2 d-none d-lg-block">
-                <span class="mb-0 text-sm font-weight-bold">{{ dispalyName }}</span>
+                <span class="mb-0 text-sm font-weight-bold">{{ displayName }}</span>
               </div>
             </div>
           </template>
@@ -71,7 +71,7 @@ export default {
     const auth = getAuth();
     auth.onAuthStateChanged(() => {
       if (auth.currentUser) {
-        this.dispalyName = auth.currentUser.displayName;
+        this.displayName = auth.currentUser.displayName;
         if (auth.currentUser.photoURL) {
           this.photoUrl = `https://telegram.im/img/${auth.currentUser.photoURL.trim()}`; 
         }
@@ -80,7 +80,7 @@ export default {
   },
   data() {
     return {
-      dispalyName: '',
+      displayName: '',
       activeNotifications: false,
       showMenu: false,
       photoUrl: null,
