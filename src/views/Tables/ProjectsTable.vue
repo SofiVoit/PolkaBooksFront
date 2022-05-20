@@ -59,7 +59,7 @@
             </div>
           </td>
           <td class="mail">
-            <a :href="`https://telegram.im/@${row.item.tgUserName}`" target="_blank" style="font-size: 25px; cursor: pointer;">
+            <a :href="`https://telegram.im/${row.item.tgUserName}`" target="_blank" style="font-size: 25px; cursor: pointer;">
               <i class="ni ni-send"></i>
             </a>
           </td>
@@ -75,8 +75,26 @@
   </div>
 </template>
 <script>
+import { collection, query, getDocs } from "firebase/firestore";
+
 export default {
   name: "projects-table",
+  beforeMount: function() {
+    // const q = query(collection(window.firestore, "books"), where("ownerId", "==", window.getCookie('authToken')));
+    const q = query(collection(window.firestore, "books"));
+    const querySnapshot = getDocs(q);
+
+    querySnapshot.then((data) => {
+      data.docs.forEach((book) => {
+        this.$data.tableData.push({
+          bookName: book.get('name'),
+          bookAutor: book.get('author'),
+          ownerImg: `https://telegram.im/img/${book.get('userOwner')}`,
+          tgUserName: book.get('userOwner'),
+        })
+      });
+    })
+  },
   props: {
     type: {
       type: String,
@@ -85,8 +103,12 @@ export default {
   },
   data() {
     return {
-      tableData: [
-        {
+      tableData: []
+    };
+  },
+};
+/**
+ * {
           bookName: "Война и мир",
           bookAutor: 'Л.Н. Толстой',
           ownerImg: 'img/theme/team-1-800x800.jpg',
@@ -134,9 +156,7 @@ export default {
           ownerImg: 'img/theme/team-1-800x800.jpg',
           tgUserName: "v_prokopchenko",
         },
-      ]
-    };
-  },
-};
+ */
 </script>
 <style></style>
+

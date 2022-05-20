@@ -70,6 +70,8 @@ import ArgonDashboard from "./plugins/argon-dashboard";
 import "element-plus/lib/theme-chalk/index.css";
 
 import { initializeApp } from 'firebase/app';
+import { getFirestore } from "firebase/firestore";
+
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -82,10 +84,12 @@ const firebaseConfig = {
     appId: "1:883989697225:web:588528e7ad121633753318"
 };
 
-initializeApp(firebaseConfig);
+const appFirebase = initializeApp(firebaseConfig);
+window.firestore = getFirestore(appFirebase);
 
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+window.adminUid = '1cHvsM68aZSTGcZjMGwyiAOcpCP2';
 
 const appInstance = createApp(App);
 appInstance.use(VueSweetalert2);

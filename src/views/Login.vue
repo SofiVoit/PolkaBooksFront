@@ -55,7 +55,7 @@ export default {
       signInWithEmailAndPassword(auth, this.$data.model.email, this.$data.model.password)
         .then((userCredential) => {
           console.log('USER LOGIN', userCredential.user);
-          window.setCookie('authToken', userCredential.user.accessToken);
+          window.setCookie('authToken', userCredential.user.uid);
           this.$router.push('/dashboard');
         })
         .catch((error) => {

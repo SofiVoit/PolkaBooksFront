@@ -68,6 +68,8 @@
   </div>
 </template>
 <script>
+import { collection, query, getDocs, where } from "firebase/firestore";
+
 export default {
   name: "projects-table",
   props: {
@@ -75,6 +77,20 @@ export default {
       type: String,
     },
     title: String,
+  },
+  beforeMount: function() {
+    const q = query(collection(window.firestore, "books"), where("ownerId", "==", window.getCookie('authToken')));
+    const querySnapshot = getDocs(q);
+
+    querySnapshot.then((data) => {
+      data.docs.forEach((book) => {
+        this.$data.tableData.push({
+          bookName: book.get('name'),
+          bookAutor: book.get('author'),
+          opinion: book.get('opinion'),
+        })
+      });
+    })
   },
   methods: {
     edit() {
@@ -122,7 +138,12 @@ export default {
   data() {
     return {
       tableData: [
-        {
+      ],
+    };
+  },
+};
+/**
+ * {
           bookName: "Война и мир",
           bookAutor: 'Л.Н. Толстой',
           opinion: '10/10'
@@ -147,9 +168,6 @@ export default {
           bookAutor: 'Стэн Ли',
           opinion: 'Не читал(а)'
         }
-      ],
-    };
-  },
-};
+ */
 </script>
 <style></style>
