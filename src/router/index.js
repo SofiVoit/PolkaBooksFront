@@ -20,7 +20,7 @@ const routes = [
     children: [
       {
         path: "/dashboard",
-        name: "Поиск книги",
+        name: "Найти книгу",
         components: { default: Dashboard },
         meta: {
           requiresAuth: true

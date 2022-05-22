@@ -57,7 +57,7 @@
             <div class="col-lg-5 col-md-6">
               <h1 class="text-white">Добро пожаловать!</h1>
               <p class="text-lead text-white">
-                Приветственный текст с предложением войти или зарегистрироваться
+                Пожалуйста, войдите в PolkaBooks или пройдите регистрацию
               </p>
             </div>
           </div>
