@@ -35,7 +35,7 @@
               </div>
               <div class="text-center">
                 <h3>
-                  Библиотека РТФ<span class="font-weight-light">, 30</span>
+                  Библиотека РТФ
                 </h3>
                 <div class="h5 font-weight-300">
                   <i class="ni location_pin mr-2"></i>Россия, Екатеринбург
