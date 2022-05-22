@@ -5,10 +5,17 @@
       :class="type === 'dark' ? 'bg-transparent' : ''"
     >
       <div class="row align-items-center">
-        <div class="col">
+        <div class="col" style="flex-grow: 4">
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
             {{ title }}
           </h3>
+        </div>
+        <div class="col">
+          <base-input
+            formClasses="input-group-alternative"
+            placeholder="Поиск"
+            addon-left-icon="fas fa-search"
+            v-model="search"></base-input>
         </div>
       </div>
     </div>
@@ -19,7 +26,7 @@
         :class="type === 'dark' ? 'table-dark' : ''"
         :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"
         tbody-classes="list"
-        :data="tableData"
+        :data="filteredData"
       >
         <template v-slot:columns>
           <th>Название</th>
@@ -101,9 +108,22 @@ export default {
     },
     title: String,
   },
+  computed: {
+    filteredData: function() {
+      const _this = this;
+      return _this.$data.tableData.filter((item) => {
+        if (_this.$data.search && item.bookName) {
+          return item.bookName.toLowerCase().includes(_this.$data.search);
+        } else {
+          return true;
+        }
+      });
+    }
+  },
   data() {
     return {
-      tableData: []
+      tableData: [],
+      search: ''
     };
   },
 };
