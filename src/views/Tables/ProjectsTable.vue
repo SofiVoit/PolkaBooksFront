@@ -69,6 +69,7 @@
                 <img
                   alt="Image placeholder"
                   :src="row.item.ownerImg"
+                  onerror="this.onerror=null;this.src='https://placeimg.com/320/320/animals'"
                 />
               </a>
             </div>
