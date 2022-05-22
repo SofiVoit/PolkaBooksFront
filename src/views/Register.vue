@@ -7,35 +7,38 @@
             <small>Регистрация</small>
           </div>
           <form role="form">
-            <base-input
-              formClasses="input-group-alternative mb-3"
-              placeholder="Email"
-              addon-left-icon="ni ni-email-83"
-              v-model="model.email"
-              focused
-            >
-            </base-input>
+            <div style="margin-bottom: 15px; border-bottom: 1px solid rgba(0,0,0,.10);">
+              <base-input
+                formClasses="input-group-alternative mb-3"
+                placeholder="Email"
+                addon-left-icon="ni ni-email-83"
+                v-model="model.email"
+                focused
+              >
+              </base-input>
 
-            <base-input
-              formClasses="input-group-alternative mb-3"
-              placeholder="Пароль"
-              addon-left-icon="ni ni-lock-circle-open"
-              v-model="model.password"
-            >
-            </base-input>
+              <base-input
+                formClasses="input-group-alternative mb-3"
+                placeholder="Пароль"
+                type="password"
+                addon-left-icon="ni ni-lock-circle-open"
+                v-model="model.password"
+              >
+              </base-input>
+            </div>
 
             <base-input
               formClasses="input-group-alternative mb-3"
               placeholder="Имя"
-              addon-left-icon="ni ni-lock-circle-open"
+              addon-left-icon="ni ni-badge"
               v-model="model.name"
             >
             </base-input>
 
             <base-input
               formClasses="input-group-alternative mb-3"
-              placeholder="имя пользователя телеграм"
-              addon-left-icon="ni ni-lock-circle-open"
+              placeholder="Имя пользователя телеграм"
+              addon-left-icon="ni ni-send"
               v-model="model.tgTag"
             >
             </base-input>
