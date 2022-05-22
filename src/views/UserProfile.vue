@@ -13,7 +13,7 @@
                   <a href="#">
                     <img
                       :src="photoUrl"
-                      onerror="this.onerror=null;this.src='https://placeimg.com/320/320/animals'"
+                      onerror="this.src='https://placeimg.com/320/320/animals'"
                       class="rounded-circle"
                     />
                   </a>
