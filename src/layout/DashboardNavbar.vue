@@ -27,6 +27,7 @@
                 <img
                   alt="Image placeholder"
                   :src="photoUrl"
+                  onerror="this.onerror=null;this.src='https://placeimg.com/320/320/animals'"
                 />
               </span>
               <div class="media-body ml-2 d-none d-lg-block">
