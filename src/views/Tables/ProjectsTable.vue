@@ -31,6 +31,7 @@
         <template v-slot:columns>
           <th>Название</th>
           <th>Автор</th>
+          <th>Жанр</th>
           <th>Хозяин</th>
           <th>Телеграм</th>
         </template>
@@ -47,6 +48,13 @@
             <div class="media align-items-center">
               <div class="media-body">
                 <span class="name mb-0 text-sm">{{ row.item.bookAutor }}</span>
+              </div>
+            </div>
+          </th>
+          <th scope="row">
+            <div class="media align-items-center">
+              <div class="media-body">
+                <span class="name mb-0 text-sm">{{ row.item.bookGenre }}</span>
               </div>
             </div>
           </th>
@@ -96,6 +104,7 @@ export default {
         this.$data.tableData.push({
           bookName: book.get('name'),
           bookAutor: book.get('author'),
+          bookGenre: book.get('opinion'),
           ownerImg: `https://telegram.im/img/${book.get('userOwner')}`,
           tgUserName: book.get('userOwner'),
         })
