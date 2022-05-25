@@ -123,7 +123,7 @@ export default {
       const _this = this;
       return _this.$data.tableData.filter((item) => {
         if (_this.$data.search && item.bookName) {
-          return item.bookName.toLowerCase().includes(_this.$data.search);
+          return item.bookName.toLowerCase().includes(_this.$data.search.toLowerCase());
         } else {
           return true;
         }
