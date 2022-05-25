@@ -4,7 +4,8 @@
       <div class="card bg-secondary shadow border-0">
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
-            <small>Вход</small>
+            <small v-if="!errorMessage">Вход</small>
+            <small id="errorMessage" style="color: red;" v-else>{{ errorMessage }}</small>
           </div>
           <form role="form">
             <base-input
@@ -37,6 +38,10 @@
 </template>
 <script>
 import { getAuth, signInWithEmailAndPassword, setPersistence, browserSessionPersistence } from "firebase/auth";
+const ERROR_CODES = {
+  'auth/wrong-password': 'Проверьте правильность ввода логина и пароля',
+  'auth/too-many-requests': 'Превышено количество попыток, попробуйте позже'
+}
 
 export default {
   name: "login",
@@ -46,6 +51,7 @@ export default {
         email: "",
         password: "",
       },
+      errorMessage: ''
     };
   },
   methods: {
@@ -59,7 +65,7 @@ export default {
           this.$router.push('/dashboard');
         })
         .catch((error) => {
-          console.log('USER LOGIN ERROR', error);
+          this.$data.errorMessage = ERROR_CODES[error.code];
         });
     }
   }
