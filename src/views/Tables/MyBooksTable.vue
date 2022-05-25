@@ -68,7 +68,9 @@
   </div>
 </template>
 <script>
-import { collection, query, getDocs, where } from "firebase/firestore";
+import { collection, query, getDocs, where, doc, setDoc, deleteDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+
 
 export default {
   name: "projects-table",
@@ -85,11 +87,22 @@ export default {
     querySnapshot.then((data) => {
       data.docs.forEach((book) => {
         this.$data.tableData.push({
+          id: book.id,
           bookName: book.get('name'),
           bookAutor: book.get('author'),
           opinion: book.get('opinion'),
         })
       });
+    })
+  },
+  mounted() {
+    const auth = getAuth();
+    auth.onAuthStateChanged(() => {
+      if (auth.currentUser) {
+        if (auth.currentUser.photoURL) {
+          this.userOwner = auth.currentUser.photoURL;
+        }
+      }
     })
   },
   methods: {
@@ -116,6 +129,23 @@ export default {
           })) {
             this.$swal('Не все поля заполнены');
           } else {
+            const makeid = (length) => {
+                var result = '';
+                var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                var charactersLength = characters.length;
+                for (var i = 0; i < length; i++) {
+                  result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                }
+                return result;
+            }
+            debugger;
+            setDoc(doc(window.firestore, "books", makeid(20).toUpperCase()), {
+                name: res.value[0],
+                opinion: res.value[2],
+                author: res.value[1],
+                ownerId: window.getCookie('authToken'),
+                userOwner: this.$data.userOwner
+            });
             this.$data.tableData.push({
               bookName: res.value[0],
               bookAutor: res.value[1],
@@ -127,11 +157,12 @@ export default {
     },
     remove(row) {
       const index = this.$data.tableData.findIndex((dataItem) => {
-        return dataItem.bookName === row.item.bookName;
+        return dataItem.id === row.item.id;
       });
 
       if (index !== -1) {
         this.$data.tableData.splice(index, 1);
+        deleteDoc(doc(window.firestore, "books", row.item.id));
       }
     }
   },
@@ -139,35 +170,9 @@ export default {
     return {
       tableData: [
       ],
+      userOwner: ''
     };
   },
 };
-/**
- * {
-          bookName: "Война и мир",
-          bookAutor: 'Л.Н. Толстой',
-          opinion: '10/10'
-        },
-        {
-          bookName: "Преступление и наказание",
-          bookAutor: 'Ф.М. Достоевский',
-          opinion: '7/10'
-        },
-        {
-          bookName: "Вий",
-          bookAutor: 'Н.В. Гоголь',
-          opinion: 'Не читал(а)'
-        },
-        {
-          bookName: "Зов ктулху",
-          bookAutor: 'Г.Ф. Лавкрафт',
-          opinion: 'Не читал(а)'
-        },
-        {
-          bookName: "Человек-паук",
-          bookAutor: 'Стэн Ли',
-          opinion: 'Не читал(а)'
-        }
- */
 </script>
 <style></style>
