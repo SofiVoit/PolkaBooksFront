@@ -5,7 +5,6 @@ import AuthLayout from "@/layout/AuthLayout";
 
 import Dashboard from "../views/Dashboard.vue";
 import Icons from "../views/Icons.vue";
-import Maps from "../views/Maps.vue";
 import Profile from "../views/UserProfile.vue";
 import Tables from "../views/Tables.vue";
 
@@ -15,29 +14,21 @@ import Register from "../views/Register.vue";
 const routes = [
   {
     path: "/",
-    redirect: "/dashboard",
+    redirect: "/books",
     component: DashboardLayout,
     children: [
       {
-        path: "/dashboard",
+        path: "/books",
         name: "Найти книгу",
         components: { default: Dashboard },
         meta: {
-          requiresAuth: true
+          requiresAuth: false
         }
       },
       {
         path: "/icons",
         name: "icons",
         components: { default: Icons },
-        meta: {
-          requiresAuth: true
-        }
-      },
-      {
-        path: "/maps",
-        name: "maps",
-        components: { default: Maps },
         meta: {
           requiresAuth: true
         }
@@ -51,7 +42,7 @@ const routes = [
         }
       },
       {
-        path: "/tables",
+        path: "/rtf",
         name: "Библиотека РТФ",
         components: { default: Tables },
         meta: {

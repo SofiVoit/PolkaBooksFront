@@ -16,7 +16,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <router-link to="/">
-                <img src="img/brand/green.png" />
+                PolkaBooks
               </router-link>
             </div>
             <div class="col-6 collapse-close">
@@ -35,14 +35,20 @@
         <!-- Navbar items -->
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
+            <router-link class="nav-link nav-link-icon " to="/books">
+              <i class="ni ni-books text-primary"></i>
+              <span class="nav-link-inner--text">Найти книгу!</span>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link nav-link-icon" to="/register">
-              <i class="ni ni-circle-08"></i>
+              <i class="ni ni-circle-08 text-red"></i>
               <span class="nav-link-inner--text">Регистрация</span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link nav-link-icon" to="/login">
-              <i class="ni ni-key-25"></i>
+              <i class="ni ni-key-25 text-yellow"></i>
               <span class="nav-link-inner--text">Вход</span>
             </router-link>
           </li>

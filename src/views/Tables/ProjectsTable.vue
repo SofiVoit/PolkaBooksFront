@@ -9,6 +9,10 @@
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
             {{ title }}
           </h3>
+          Чтобы добавить книгу
+          <router-link to="/login">
+              <span class="nav-link-inner--text">войдите</span>
+          </router-link>
         </div>
         <div class="col">
           <base-input

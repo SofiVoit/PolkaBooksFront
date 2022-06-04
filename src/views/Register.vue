@@ -88,7 +88,7 @@ export default {
             photoURL: this.$data.model.tgTag
           });
           console.log('USER REGISTERED', userCredential.user);
-          this.$router.push('/dashboard');
+          this.$router.push('/books');
       })
       .catch((error) => {
           this.$data.errorMessage = ERROR_CODES[error.code];

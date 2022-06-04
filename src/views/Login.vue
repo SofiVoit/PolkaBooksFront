@@ -62,7 +62,7 @@ export default {
         .then((userCredential) => {
           console.log('USER LOGIN', userCredential.user);
           window.setCookie('authToken', userCredential.user.uid);
-          this.$router.push('/dashboard');
+          this.$router.push('/books');
         })
         .catch((error) => {
           this.$data.errorMessage = ERROR_CODES[error.code];

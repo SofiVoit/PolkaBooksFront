@@ -8,10 +8,19 @@
           :link="{
             name: 'Найти книгу',
             icon: 'ni ni-books text-primary',
-            path: '/dashboard',
+            path: '/books',
           }"
         />
         <sidebar-item
+          v-if="!isUser"
+          :link="{
+            name: 'Войти',
+            icon: 'ni ni-key-25 text-red',
+            path: '/login',
+          }"
+        />
+        <sidebar-item
+          v-if="isUser"
           :link="{
             name: 'Мой профиль',
             icon: 'ni ni-single-02 text-yellow',
@@ -19,49 +28,13 @@
           }"
         />
         <sidebar-item
+          v-if="isUser"
           :link="{
             name: 'Библиотека РТФ',
             icon: 'ni ni-hat-3 text-red',
-            path: '/tables',
+            path: '/rtf',
           }"
         />
-
-        <!-- <sidebar-item
-          :link="{
-            name: 'Icons',
-            icon: 'ni ni-planet text-blue',
-            path: '/icons',
-          }"
-        /> -->
-        <!-- <sidebar-item
-          :link="{
-            name: 'Maps',
-            icon: 'ni ni-pin-3 text-orange',
-            path: '/maps',
-          }"
-        />
-        
-        <sidebar-item
-          :link="{
-            name: 'Tables',
-            icon: 'ni ni-bullet-list-67 text-red',
-            path: '/tables',
-          }"
-        />
-        <sidebar-item
-          :link="{
-            name: 'Login',
-            icon: 'ni ni-key-25 text-info',
-            path: '/login',
-          }"
-        />
-        <sidebar-item
-          :link="{
-            name: 'Register',
-            icon: 'ni ni-circle-08 text-pink',
-            path: '/register',
-          }"
-        /> -->
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
@@ -84,8 +57,12 @@ export default {
     DashboardNavbar,
     ContentFooter,
   },
+  mounted() {
+    this.isUser = Boolean(window.getCookie('authToken'));
+  },
   data() {
     return {
+      isUser: false,
       sidebarBackground: "vue", //vue|blue|orange|green|red|primary
     };
   },

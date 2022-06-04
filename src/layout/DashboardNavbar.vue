@@ -20,7 +20,7 @@
     </form>
     <ul class="navbar-nav align-items-center d-none d-md-flex">
       <li class="nav-item dropdown">
-        <base-dropdown class="nav-link pr-0">
+        <base-dropdown v-if="isUser" class="nav-link pr-0">
           <template v-slot:title>
             <div class="media align-items-center">
               <span v-if="photoUrl" class="avatar avatar-sm rounded-circle">
@@ -70,8 +70,10 @@ import { getAuth } from "firebase/auth";
 export default {
   mounted() {
     const auth = getAuth();
+    this.isUser = Boolean(window.getCookie('authToken'));
     auth.onAuthStateChanged(() => {
       if (auth.currentUser) {
+        this.isUser = Boolean(window.getCookie('authToken'));
         this.displayName = auth.currentUser.displayName;
         if (auth.currentUser.photoURL) {
           this.photoUrl = `https://telegram.im/img/${auth.currentUser.photoURL.trim()}`; 
@@ -86,6 +88,7 @@ export default {
       showMenu: false,
       photoUrl: null,
       searchQuery: "",
+      isUser: false
     };
   },
   methods: {

@@ -14,7 +14,7 @@
 
       <slot name="mobile-right">
         <ul class="nav align-items-center d-md-none">
-          <base-dropdown class="nav-item" position="right">
+          <base-dropdown v-if="isUser" class="nav-item" position="right">
             <template v-slot:title>
               <a class="nav-link" href="#" role="button">
                 <div class="media align-items-center">
@@ -88,11 +88,14 @@ export default {
   data() {
     return {
       photoUrl: '',
+      isUser: false
     };
   },
   mounted() {
     const auth = getAuth();
+    this.isUser = Boolean(window.getCookie('authToken'));
     auth.onAuthStateChanged(() => {
+      this.isUser = Boolean(window.getCookie('authToken'));
       if (auth.currentUser) {
         this.displayName = auth.currentUser.displayName;
         if (auth.currentUser.photoURL) {
