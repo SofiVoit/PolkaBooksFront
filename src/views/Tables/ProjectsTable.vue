@@ -9,8 +9,8 @@
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
             {{ title }}
           </h3>
-          Чтобы добавить книгу
-          <router-link to="/login">
+          <span v-if="!isUser">Чтобы добавить книгу </span>
+          <router-link v-if="!isUser" to="/login">
               <span class="nav-link-inner--text">войдите</span>
           </router-link>
         </div>
@@ -100,6 +100,7 @@ import { collection, query, getDocs } from "firebase/firestore";
 export default {
   name: "projects-table",
   beforeMount: function() {
+    this.isUser = Boolean(window.getCookie('authToken'));
     // const q = query(collection(window.firestore, "books"), where("ownerId", "==", window.getCookie('authToken')));
     const q = query(collection(window.firestore, "books"));
     const querySnapshot = getDocs(q);
@@ -137,7 +138,8 @@ export default {
   data() {
     return {
       tableData: [],
-      search: ''
+      search: '',
+      isUser: false
     };
   },
 };
