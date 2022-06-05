@@ -66,7 +66,7 @@ const routes = [
       },
       {
         path: "/register",
-        name: "Регистрация",
+        name: "Регистрация1",
         components: { default: Register },
         meta: {
           requiresAuth: false
