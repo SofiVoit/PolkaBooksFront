@@ -14,6 +14,29 @@ import Register from "../views/Register.vue";
 const routes = [
   {
     path: "/",
+    redirect: "login",
+    component: AuthLayout,
+    children: [
+      {
+        path: "/login",
+        name: "Вход",
+        components: { default: Login },
+        meta: {
+          requiresAuth: false
+        }
+      },
+      {
+        path: "/register",
+        name: "Регистрация",
+        components: { default: Register },
+        meta: {
+          requiresAuth: false
+        }
+      },
+    ],
+  },
+  {
+    path: "/",
     redirect: "/books",
     component: DashboardLayout,
     children: [
@@ -50,30 +73,7 @@ const routes = [
         }
       },
     ],
-  },
-  {
-    path: "/",
-    redirect: "login",
-    component: AuthLayout,
-    children: [
-      {
-        path: "/login",
-        name: "Вход",
-        components: { default: Login },
-        meta: {
-          requiresAuth: false
-        }
-      },
-      {
-        path: "/register",
-        name: "Регистрация",
-        components: { default: Register },
-        meta: {
-          requiresAuth: false
-        }
-      },
-    ],
-  },
+  }
 ];
 
 const router = createRouter({
