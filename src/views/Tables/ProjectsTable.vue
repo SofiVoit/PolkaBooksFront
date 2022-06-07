@@ -91,6 +91,7 @@
       class="card-footer d-flex justify-content-end"
       :class="type === 'dark' ? 'bg-transparent' : ''"
     >
+    <a :href="`https://telegram.im/@Sofia_voitsik`" target="_blank" style="color: red; font-size: 13px;">Написать администратору</a>
     </div>
   </div>
 </template>

@@ -35,7 +35,7 @@
               </div>
               <div class="text-center">
                 <h3>
-                  Библиотека РТФ
+                  Полка РТФ
                 </h3>
                 <div class="h5 font-weight-300">
                   <i class="ni location_pin mr-2"></i>Россия, Екатеринбург
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="col-xl-8 mb-5 mb-xl-0">
-          <user-table title="Мои книжки"></user-table>
+          <user-table title="Книги РТФ"></user-table>
         </div>
       </div>
     </div>

@@ -138,7 +138,6 @@ export default {
                 }
                 return result;
             }
-            debugger;
             setDoc(doc(window.firestore, "books", makeid(20).toUpperCase()), {
                 name: res.value[0],
                 opinion: res.value[2],

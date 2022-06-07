@@ -58,7 +58,7 @@ const routes = [
       },
       {
         path: "/profile",
-        name: "Мой профиль",
+        name: "Моя полка",
         components: { default: Profile },
         meta: {
           requiresAuth: true
@@ -66,7 +66,7 @@ const routes = [
       },
       {
         path: "/rtf",
-        name: "Библиотека РТФ",
+        name: "Полка РТФ",
         components: { default: Tables },
         meta: {
           requiresAuth: true

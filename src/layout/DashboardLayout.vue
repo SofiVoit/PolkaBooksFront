@@ -22,7 +22,7 @@
         <sidebar-item
           v-if="isUser"
           :link="{
-            name: 'Мой профиль',
+            name: 'Моя полка',
             icon: 'ni ni-single-02 text-yellow',
             path: '/profile',
           }"
@@ -30,7 +30,7 @@
         <sidebar-item
           v-if="isUser"
           :link="{
-            name: 'Библиотека РТФ',
+            name: 'Полка РТФ',
             icon: 'ni ni-hat-3 text-red',
             path: '/rtf',
           }"

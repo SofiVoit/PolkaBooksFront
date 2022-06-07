@@ -25,6 +25,7 @@
           <th>Название</th>
           <th>Автор</th>
           <th>Жанр</th>
+          <th style="text-align: center;">Забронировать</th>
         </template>
 
         <template v-slot:default="row">
@@ -46,6 +47,14 @@
             <div class="media align-items-center">
               <div class="media-body">
                 <span class="name mb-0 text-sm">{{ row.item.opinion }}</span>
+              </div>
+            </div>
+          </th>
+          <th scope="row" class="mail">
+            <div style="display: flex; justify-content: center;">
+              <div style="font-size: 25px; cursor: pointer;" @click="booking(row)">
+                <i v-if="row.item.booking" class="ni ni-archive-2" style="color: red"></i>
+                <i v-else class="ni ni-lock-circle-open" style="color: #5e72e4;"></i>
               </div>
             </div>
           </th>
@@ -79,9 +88,11 @@ export default {
     querySnapshot.then((data) => {
       data.docs.forEach((book) => {
         this.$data.tableData.push({
+          id: book.id,
           bookName: book.get('name'),
           bookAutor: book.get('author'),
           opinion: book.get('opinion'),
+          booking: book.get('booking')
         })
       });
     })
@@ -92,57 +103,17 @@ export default {
       ],
     };
   },
-};
+  methods: {
+    booking(row) {
+      const index = this.$data.tableData.findIndex((dataItem) => {
+        return dataItem.id === row.item.id;
+      });
 
-/**{
-          bookName: "Чистая архитектура",
-          bookAutor: 'Р. Мартин',
-          opinion: '10/10'
-        },
-        {
-          bookName: "Пять пороков команды",
-          bookAutor: 'П. Ленсиони',
-          opinion: '10/10'
-        },
-        {
-          bookName: "Совершенный код",
-          bookAutor: 'С. Макконнелл',
-          opinion: '10/10'
-        },
-        {
-          bookName: "C# 3.0: A Beginner S Guide",
-          bookAutor: 'Г. Шилдт',
-          opinion: '9/10'
-        },
-        {
-          bookName: "Язык программирования С++",
-          bookAutor: 'Б. Страуструп',
-          opinion: '9/10'
-        },
-        {
-          bookName: "Философия Java",
-          bookAutor: 'Б. Эккель',
-          opinion: '8/10'
-        },
-        {
-          bookName: "Алгоритмы: построение и анализ",
-          bookAutor: 'Р. Ривест',
-          opinion: '7/10'
-        },
-        {
-          bookName: "JavaScript. Подробное руководство",
-          bookAutor: 'Д. Флэнаган',
-          opinion: '6/10'
-        },
-        {
-          bookName: "Современное проектирование на С++",
-          bookAutor: 'А. Александреску',
-          opinion: '8/10'
-        },
-        {
-          bookName: "JavaScript: сильные стороны",
-          bookAutor: 'Д. Крокфорд',
-          opinion: '9/10'
-        } */
+      if (index !== -1) {
+        this.$data.tableData[index].booking = Boolean(!this.$data.tableData[index].booking);
+      }
+    }
+  },
+};
 </script>
 <style></style>
