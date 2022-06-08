@@ -98,6 +98,11 @@
 </template>
 <script>
 import { collection, query, getDocs } from "firebase/firestore";
+const CACHE_OWNERS = {
+  'urfu_ru': 'img/theme/rtf.png',
+  '@Sofia_voitsik': 'img/theme/sonya2.jpg',
+  '@v_prokopchenko': 'img/theme/slava.jpg'
+}
 
 export default {
   name: "projects-table",
@@ -110,11 +115,12 @@ export default {
 
     querySnapshot.then((data) => {
       data.docs.forEach((book) => {
+        const userImg = this.getUserImg(book.get('userOwner'))
         this.$data.tableData.push({
           bookName: book.get('name'),
           bookAutor: book.get('author'),
           bookGenre: book.get('opinion'),
-          ownerImg: `https://telegram.im/img/${book.get('userOwner')}`,
+          ownerImg: userImg,
           tgUserName: book.get('userOwner'),
         })
       });
@@ -126,6 +132,11 @@ export default {
       type: String,
     },
     title: String,
+  },
+  methods: {
+    getUserImg(userOwner) {
+      return CACHE_OWNERS[userOwner] ?? `https://telegram.im/img/${userOwner}`
+    }
   },
   computed: {
     filteredData: function() {

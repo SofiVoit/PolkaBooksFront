@@ -46,6 +46,11 @@
 </template>
 <script>
 import { getAuth } from "firebase/auth";
+const CACHE_OWNERS = {
+  'urfu_ru': 'img/theme/rtf.png',
+  '@Sofia_voitsik': 'img/theme/sonya2.jpg',
+  '@v_prokopchenko': 'img/theme/slava.jpg'
+}
 
 export default {
   mounted() {
@@ -56,7 +61,7 @@ export default {
         this.isUser = Boolean(window.getCookie('authToken'));
         this.displayName = auth.currentUser.displayName;
         if (auth.currentUser.photoURL) {
-          this.photoUrl = `https://telegram.im/img/${auth.currentUser.photoURL.trim()}`; 
+          this.photoUrl = CACHE_OWNERS[auth.currentUser.photoURL] ?? `https://telegram.im/img/${auth.currentUser.photoURL.trim()}`; 
         }
       }
     })
