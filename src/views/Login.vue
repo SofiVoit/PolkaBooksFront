@@ -26,9 +26,10 @@
             </base-input>
 
             <div class="text-center">
-              <base-button type="primary" class="my-4" @click="login">
+              <base-button v-if="!model.load" type="primary" class="my-4" @click="login">
                 Войти
               </base-button>
+              <div v-else class="lds-ring"><div></div><div></div><div></div><div></div></div>
             </div>
           </form>
         </div>
@@ -50,6 +51,7 @@ export default {
       model: {
         email: "",
         password: "",
+        load: false
       },
       errorMessage: ''
     };
@@ -58,10 +60,12 @@ export default {
     login() {
       const auth = getAuth();
       setPersistence(auth, browserSessionPersistence);
+      this.$data.model.load = true;
       signInWithEmailAndPassword(auth, this.$data.model.email, this.$data.model.password)
         .then((userCredential) => {
           console.log('USER LOGIN', userCredential.user);
           window.setCookie('authToken', userCredential.user.uid);
+          this.$data.model.load = false;
           this.$router.push('/books');
         })
         .catch((error) => {
@@ -71,4 +75,41 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 84px;
+  height: 84px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #172B4D;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #172B4D transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+</style>

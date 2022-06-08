@@ -31,6 +31,7 @@
         :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"
         tbody-classes="list"
         :data="filteredData"
+        :load="load"
       >
         <template v-slot:columns>
           <th>Название</th>
@@ -91,7 +92,7 @@
       class="card-footer d-flex justify-content-end"
       :class="type === 'dark' ? 'bg-transparent' : ''"
     >
-    <a :href="`https://telegram.im/@Sofia_voitsik`" target="_blank" style="color: red; font-size: 13px;">Написать администратору</a>
+    <a v-if="!load" :href="`https://telegram.im/@Sofia_voitsik`" target="_blank" style="color: red; font-size: 13px;">Написать администратору</a>
     </div>
   </div>
 </template>
@@ -105,6 +106,7 @@ export default {
     // const q = query(collection(window.firestore, "books"), where("ownerId", "==", window.getCookie('authToken')));
     const q = query(collection(window.firestore, "books"));
     const querySnapshot = getDocs(q);
+    this.$data.load = true;
 
     querySnapshot.then((data) => {
       data.docs.forEach((book) => {
@@ -116,6 +118,7 @@ export default {
           tgUserName: book.get('userOwner'),
         })
       });
+      this.$data.load = false;
     })
   },
   props: {
@@ -140,7 +143,8 @@ export default {
     return {
       tableData: [],
       search: '',
-      isUser: false
+      isUser: false,
+      load: true
     };
   },
 };

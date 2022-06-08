@@ -20,6 +20,7 @@
         :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"
         tbody-classes="list"
         :data="tableData"
+        :load="load"
       >
         <template v-slot:columns>
           <th>Название</th>
@@ -84,6 +85,7 @@ export default {
   beforeMount: function() {
     const q = query(collection(window.firestore, "books"), where("ownerId", "==", window.adminUid));
     const querySnapshot = getDocs(q);
+    this.$data.load = true;
 
     querySnapshot.then((data) => {
       data.docs.forEach((book) => {
@@ -95,12 +97,13 @@ export default {
           booking: book.get('booking')
         })
       });
+      this.$data.load = false;
     })
   },
   data() {
     return {
-      tableData: [
-      ],
+      tableData: [],
+      load: false
     };
   },
   methods: {
