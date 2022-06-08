@@ -100,8 +100,8 @@ export default {
       if (auth.currentUser) {
         this.displayName = auth.currentUser.displayName;
         if (auth.currentUser.photoURL) {
-          this.photoUrl = `https://telegram.im/img/${auth.currentUser.photoURL.trim()}`; 
-          this.tgName = CACHE_OWNERS[auth.currentUser.photoURL] ?? `https://telegram.im/img/${auth.currentUser.photoURL.trim()}`;
+          this.photoUrl = CACHE_OWNERS[auth.currentUser.photoURL] ?? `https://telegram.im/img/${auth.currentUser.photoURL.trim()}`; 
+          this.tgName = auth.currentUser.photoURL;
         }
       }
     })
