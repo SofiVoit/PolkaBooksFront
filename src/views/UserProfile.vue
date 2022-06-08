@@ -79,6 +79,12 @@
 </template>
 <script>
 
+const CACHE_OWNERS = {
+  'urfu_ru': 'img/theme/rtf.png',
+  '@Sofia_voitsik': 'img/theme/sonya2.jpg',
+  '@v_prokopchenko': 'img/theme/slava.jpg'
+}
+
 import MyBooksTable from "./Tables/MyBooksTable";
 import { getAuth, updateProfile } from "firebase/auth";
 
@@ -95,7 +101,7 @@ export default {
         this.displayName = auth.currentUser.displayName;
         if (auth.currentUser.photoURL) {
           this.photoUrl = `https://telegram.im/img/${auth.currentUser.photoURL.trim()}`; 
-          this.tgName = auth.currentUser.photoURL;
+          this.tgName = CACHE_OWNERS[auth.currentUser.photoURL] ?? `https://telegram.im/img/${auth.currentUser.photoURL.trim()}`;
         }
       }
     })
