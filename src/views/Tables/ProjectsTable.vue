@@ -148,56 +148,6 @@ export default {
     };
   },
 };
-/**
- * {
-          bookName: "Война и мир",
-          bookAutor: 'Л.Н. Толстой',
-          ownerImg: 'img/theme/team-1-800x800.jpg',
-          tgUserName: "Sofia_voitsik",
-        },
-        {
-          bookName: "Преступление и наказание",
-          bookAutor: 'Ф.М. Достоевский',
-          ownerImg: 'img/theme/team-2-800x800.jpg',
-          tgUserName: "v_prokopchenko",
-        },
-        {
-          bookName: "Вий",
-          bookAutor: 'Н.В. Гоголь',
-          ownerImg: 'img/theme/team-3-800x800.jpg',
-          tgUserName: "v_prokopchenko",
-        },
-        {
-          bookName: "Зов ктулху",
-          bookAutor: 'Г.Ф. Лавкрафт',
-          ownerImg: 'img/theme/team-4-800x800.jpg',
-          tgUserName: "v_prokopchenko",
-        },
-        {
-          bookName: "Человек-паук",
-          bookAutor: 'Стэн Ли',
-          ownerImg: 'img/theme/rtf.png',
-          tgUserName: "Sofia_voitsik",
-        },
-        {
-          bookName: "Черный абелиск",
-          bookAutor: 'Э.М. Ремарк',
-          ownerImg: 'img/theme/team-2-800x800.jpg',
-          tgUserName: "v_prokopchenko",
-        },
-        {
-          bookName: "Гарри Поттер и кубок огня",
-          bookAutor: 'Дж. Роулинг',
-          ownerImg: 'img/theme/team-4-800x800.jpg',
-          tgUserName: "v_prokopchenko",
-        },
-        {
-          bookName: "Хоббит или путешествие туда и обратно",
-          bookAutor: 'Дж. Толкиен',
-          ownerImg: 'img/theme/team-1-800x800.jpg',
-          tgUserName: "v_prokopchenko",
-        },
- */
 </script>
 <style></style>
 

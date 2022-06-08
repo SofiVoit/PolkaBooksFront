@@ -70,6 +70,7 @@ export default {
         })
         .catch((error) => {
           this.$data.errorMessage = ERROR_CODES[error.code];
+          this.$data.model.load = false;
         });
     }
   }

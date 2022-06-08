@@ -9,7 +9,7 @@
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
             {{ title }}
           </h3>
-          <base-button size="sm" type="info" class="ml-4" @click="edit">Добавить</base-button>
+          <base-button size="sm" type="info" class="ml-4" @click="add">Добавить</base-button>
         </div>
       </div>
     </div>
@@ -109,7 +109,7 @@ export default {
     })
   },
   methods: {
-    edit() {
+    add() {
       this.$swal({
         title: 'Добавить книжку',
         html:
