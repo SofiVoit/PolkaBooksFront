@@ -26,36 +26,36 @@
           <th>Название</th>
           <th>Автор</th>
           <th>Жанр</th>
-          <th style="text-align: center;">Забронировать</th>
+          <th style="text-align: center;">Наличие</th>
         </template>
 
         <template v-slot:default="row">
           <th scope="row">
             <div class="media align-items-center">
               <div class="media-body">
-                <span class="name mb-0 text-sm">{{ row.item.bookName }}</span>
+                <div :class="row.item.booking ? 'unaccent' : ''"><span class="name mb-0 text-sm">{{ row.item.bookName }}</span></div>
               </div>
             </div>
           </th>
           <th scope="row">
-            <div class="media align-items-center">
+            <div class="media align-items-center {{row.item.booking ? 'unaccent' : ''}}">
               <div class="media-body">
-                <span class="name mb-0 text-sm">{{ row.item.bookAutor }}</span>
+                <div :class="row.item.booking ? 'unaccent' : ''"><span class="name mb-0 text-sm">{{ row.item.bookAutor }}</span></div>
               </div>
             </div>
           </th>
           <th scope="row">
-            <div class="media align-items-center">
+            <div class="media align-items-center {{row.item.booking ? 'unaccent' : ''}}">
               <div class="media-body">
-                <span class="name mb-0 text-sm">{{ row.item.opinion }}</span>
+                <div :class="row.item.booking ? 'unaccent' : ''"><span class="name mb-0 text-sm">{{ row.item.opinion }}</span></div>
               </div>
             </div>
           </th>
           <th scope="row" class="mail">
             <div style="display: flex; justify-content: center;">
               <div style="font-size: 25px; cursor: pointer;" @click="booking(row)">
-                <i v-if="row.item.booking" class="ni ni-archive-2" style="color: red"></i>
-                <i v-else class="ni ni-lock-circle-open" style="color: #5e72e4;"></i>
+                <i v-if="row.item.booking" class="ni ni-fat-remove" style="color: #8D9CAE"></i>
+                <i v-else class="ni ni-book-bookmark" style="color: #5e72e4;"></i>
               </div>
             </div>
           </th>
@@ -72,7 +72,8 @@
 </template>
 <script>
 
-import { collection, query, getDocs, where } from "firebase/firestore";
+import { collection, query, getDocs, where, doc, setDoc} from "firebase/firestore";
+
 
 export default {
   name: "projects-table",
@@ -94,6 +95,8 @@ export default {
           bookName: book.get('name'),
           bookAutor: book.get('author'),
           opinion: book.get('opinion'),
+          ownerId: book.get('ownerId'),
+          userOwner: book.get('userOwner'),
           booking: book.get('booking')
         })
       });
@@ -114,9 +117,20 @@ export default {
 
       if (index !== -1) {
         this.$data.tableData[index].booking = Boolean(!this.$data.tableData[index].booking);
+        setDoc(doc(window.firestore, "books", this.$data.tableData[index].id), {
+            name: this.$data.tableData[index].bookName,
+            author: this.$data.tableData[index].bookAutor,
+            opinion: this.$data.tableData[index].opinion,
+            ownerId: this.$data.tableData[index].ownerId,
+            userOwner: this.$data.tableData[index].userOwner,
+            booking: this.$data.tableData[index].booking
+        });
       }
     }
   },
 };
 </script>
-<style></style>
+<style>
+.unaccent {
+  color: #8D9CAE;
+}</style>
