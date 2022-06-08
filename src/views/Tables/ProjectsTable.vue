@@ -80,7 +80,7 @@
             </div>
           </td>
           <td class="mail">
-            <a :href="`https://telegram.im/${row.item.tgUserName}`" target="_blank" style="font-size: 25px; cursor: pointer;">
+            <a :href="`tg://resolve?domain=${row.item.tgUserName}`" style="font-size: 25px; cursor: pointer;">
               <i class="ni ni-send"></i>
             </a>
           </td>
@@ -92,7 +92,7 @@
       class="card-footer d-flex justify-content-end"
       :class="type === 'dark' ? 'bg-transparent' : ''"
     >
-    <a v-if="!load" :href="`https://telegram.im/@Sofia_voitsik`" target="_blank" style="color: red; font-size: 13px;">Написать администратору</a>
+    <a v-if="!load" :href="`tg://resolve?domain=Sofia_voitsik`" target="_blank" style="color: red; font-size: 13px;">Написать администратору</a>
     </div>
   </div>
 </template>
@@ -102,13 +102,12 @@ const CACHE_OWNERS = {
   'urfu_ru': 'img/theme/rtf.png',
   '@Sofia_voitsik': 'img/theme/sonya2.jpg',
   '@v_prokopchenko': 'img/theme/slava.jpg'
-}
+};
 
 export default {
   name: "projects-table",
   beforeMount: function() {
     this.isUser = Boolean(window.getCookie('authToken'));
-    // const q = query(collection(window.firestore, "books"), where("ownerId", "==", window.getCookie('authToken')));
     const q = query(collection(window.firestore, "books"));
     const querySnapshot = getDocs(q);
     this.$data.load = true;
@@ -121,7 +120,7 @@ export default {
           bookAutor: book.get('author'),
           bookGenre: book.get('opinion'),
           ownerImg: userImg,
-          tgUserName: book.get('userOwner'),
+          tgUserName: book.get('userOwner').replace('@', ''),
         })
       });
       this.$data.load = false;
